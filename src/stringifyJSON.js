@@ -3,5 +3,13 @@
 
 // but you don't so you're going to write it from scratch:
 var stringifyJSON = function(obj) {
-  // your code goes here
+
+	for(var x in obj) {
+
+	}
+
+	if(Array.isArray(obj)) {
+		return '[' + obj.join(',') + ']';
+	}
+
 };

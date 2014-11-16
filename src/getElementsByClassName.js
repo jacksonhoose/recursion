@@ -4,6 +4,23 @@
 // };
 
 // But instead we're going to implement it from scratch:
+
 var getElementsByClassName = function(className){
-  // your code here
+	var matches = [],
+		search = function (element) {
+			element = element || document.body;
+
+			if(element.classList && Array.prototype.indexOf.call(element.classList, className) !== -1) {
+				matches.push(element);
+			}
+
+			if(element.childNodes.length) {
+				for (var x = 0; x < element.childNodes.length; x++) {
+					search(element.childNodes[x]);
+				}
+			}
+
+		};
+	search();
+	return matches;
 };
