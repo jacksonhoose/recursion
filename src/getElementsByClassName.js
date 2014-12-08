@@ -5,22 +5,21 @@
 
 // But instead we're going to implement it from scratch:
 
-var getElementsByClassName = function(className){
-	var matches = [],
-		search = function (element) {
-			element = element || document.body;
+var getElementsByClassName = function(className, node){
+  var results = [];
+  node = node || document.body;
 
-			if(element.classList && Array.prototype.indexOf.call(element.classList, className) !== -1) {
-				matches.push(element);
-			}
+  var list = node.className ? node.className.split(' ') : [];
+  if(list.indexOf(className) >= 0) {
+    results.push(node);
+  }
 
-			if(element.childNodes.length) {
-				for (var x = 0; x < element.childNodes.length; x++) {
-					search(element.childNodes[x]);
-				}
-			}
+  if(node.hasChildNodes()) {
+    for(var x = 0; x < node.childNodes.length; x++) {
+      var temp = getElementsByClassName(className, node.childNodes[x]);
+      results = results.concat(temp);
+    }
+  }
 
-		};
-	search();
-	return matches;
+  return results;
 };
