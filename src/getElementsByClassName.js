@@ -24,3 +24,37 @@ var getElementsByClassName = function(className, node){
   return results;
 
 };
+
+function getElementsByClassName = function(className, node){
+  node.LISTOFCHILDREN.reduce(function(sum, child){
+    return sum.concat(getElementsByClassName(className, child));
+  }, hasClass(node.classList, class) ? [node.elemet] : []);
+  function hasClass(list, target){
+    list.split(",").some(function(element){
+      return element === target;
+    })
+  }
+}
+
+function Tree(value) {
+  return {
+    value : value,
+    children : [];
+  }
+}
+
+
+Tree.prototype.countLeaves = function(){
+  return this.children.reduce(function(sum, child){
+    return sum + child.countLeaves();
+  }, this.children.length? 0 : 1);
+}
+
+
+function deepReverse(x){
+  return Array.isArray(x) ?
+  reverse(x.map(function(element){
+    return deepReverse(element);
+  })) :
+  x
+}
