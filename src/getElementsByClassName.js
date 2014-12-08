@@ -22,4 +22,5 @@ var getElementsByClassName = function(className, node){
   }
 
   return results;
+
 };
